@@ -8,6 +8,20 @@
 </head>
 <body>
     <div class="wrapper">
+        <nav>
+            <div> <a href="{{ url_for('index') }}">Home</a></div>
+            <div class="settings"><a href="{{ url_for('login') }}">Login</a></div>
+        </nav>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
     {% block body %}
     {% endblock body %}
     </div>
