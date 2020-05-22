@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="admin-box">
+    <nav>
+        <div> <a href="">Home</a></div>
+        <div class="settings"><a href="#">Settings</a></div>
+    </nav>
+    <h1>Add Trivia Questions</h1>
+    <div class="control-section">
+        <button class="show-api">From API</button>
+        <form action="todo" class="hide get-api">
+            <select name="category" id="category">
+                <option value="general">General</option>
+                <option value="Geography">Geography</option>
+            </select>
+            <input type="hidden" id="option" name="option" value="get_api">
+            <input type="submit" value="Get Question">
+        </form>
+    </div>
+    <form action="todo">
+        <div class="question-input">
+            <input type="text" name="question" placeholder="Trivia Question">
+            <input type="text" name="correct_answer" placeholder="Correct Answer">
+            <input type="text" name="incorrect_answer_1" placeholder="Incorrect Answer">
+            <input type="text" name="incorrect_answer_2" placeholder="Incorrect Answer">
+            <input type="text" name="incorrect_answer_3" placeholder="Incorrect Answer">
+        </div>
+    </form>
+</div>
+<script src = "{{ url_for('static', filename='script/main.js') }}"></script>
+
+{% endblock body %}
