@@ -7,8 +7,8 @@
         <form class="hide get-api" action="{{ url_for('index') }}" method="post">
             <input type="hidden" id="action" name="action" value="get_question">
             <select name="category" id="category">
-                <option value="general">General</option>
-                <option value="Geography">Geography</option>
+                <option value="general_knowledge">General</option>
+                <option value="geography">Geography</option>
             </select>
             <input type="hidden" id="option" name="option" value="get_api">
             <input type="submit" value="Get Question">
@@ -22,6 +22,13 @@
             <input type="text" name="incorrect_answer_1" placeholder="Incorrect Answer">
             <input type="text" name="incorrect_answer_2" placeholder="Incorrect Answer">
             <input type="text" name="incorrect_answer_3" placeholder="Incorrect Answer">
+        </div>
+        <div class="select-difficulty">
+            <select name="difficulty" id="difficulty">
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
         </div>
         <div class="submit-button">
             <input type="button" value="Add Question">

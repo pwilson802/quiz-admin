@@ -5,6 +5,7 @@ from app.forms import LoginForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user
 from app.models import User
+from app.mod import get_question
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -33,4 +34,11 @@ def logout():
 @app.route('/index', methods=["POST", "GET"])
 @login_required
 def index():
-    return render_template('index.html')
+    if request.method == 'POST':
+        request_type = request.values.get('action')
+        if request_type == 'get_question':
+            category = request.values.get("category")
+            data = get_question(category)
+            return render_template('index.html', data=data)
+    else:
+        return render_template('index.html')
