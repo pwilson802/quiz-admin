@@ -10,7 +10,12 @@
     <div class="wrapper">
         <nav>
             <div> <a href="{{ url_for('index') }}">Home</a></div>
+            {% if current_user.is_anonymous %}
             <div class="settings"><a href="{{ url_for('login') }}">Login</a></div>
+            {% else %}
+            <div class="settings"><a href="{{ url_for('logout') }}">Logout</a></div>
+            <div> {{ current_user.username }} </div>
+            {% endif %}
         </nav>
         <hr>
         {% with messages = get_flashed_messages() %}
