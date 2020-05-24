@@ -4,7 +4,8 @@
     <h1>Add Trivia Questions</h1>
     <div class="control-section">
         <button class="show-api">From API</button>
-        <form action="todo" class="hide get-api">
+        <form class="hide get-api" action="{{ url_for('index') }}" method="post">
+            <input type="hidden" id="action" name="action" value="get_question">
             <select name="category" id="category">
                 <option value="general">General</option>
                 <option value="Geography">Geography</option>
@@ -13,13 +14,17 @@
             <input type="submit" value="Get Question">
         </form>
     </div>
-    <form action="todo">
+    <form action="{{ url_for('index') }}" method="post">
+        <input type="hidden" id="action" name="action" value="post_question">
         <div class="question-input">
             <input type="text" name="question" placeholder="Trivia Question">
             <input type="text" name="correct_answer" placeholder="Correct Answer">
             <input type="text" name="incorrect_answer_1" placeholder="Incorrect Answer">
             <input type="text" name="incorrect_answer_2" placeholder="Incorrect Answer">
             <input type="text" name="incorrect_answer_3" placeholder="Incorrect Answer">
+        </div>
+        <div class="submit-button">
+            <input type="button" value="Add Question">
         </div>
     </form>
 </div>
