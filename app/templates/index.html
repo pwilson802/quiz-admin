@@ -30,11 +30,23 @@
                 <option value="hard">Hard</option>
             </select>
         </div>
+        <div class="select-category">
+            <select name="difficulty" id="difficulty">
+                <option value="general_knowledge">Easy</option>
+                <option value="geography">Medium</option>
+                <option value="history">Hard</option>
+            </select>
+        </div>
         <div class="submit-button">
             <input type="button" value="Add Question">
         </div>
     </form>
 </div>
+{% if data is defined %}
+    <script >
+        const questionData = {{ data|tojson }}
+    </script>
+{% endif %}
 <script src = "{{ url_for('static', filename='script/main.js') }}"></script>
 
 {% endblock body %}
