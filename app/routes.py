@@ -38,6 +38,7 @@ def index():
         request_type = request.values.get('action')
         if request_type == 'get_question':
             category = request.values.get("category")
+            difficulty = request.values.get("category")
             data = get_question(category)
             return render_template('index.html', data=data)
     else:
