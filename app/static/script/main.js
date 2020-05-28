@@ -61,6 +61,14 @@ const fillQuestion = function(data){
     incorrectAnswer3.value = data.incorrect_answers[2]
 }
 
+const dateField = document.querySelector('.date-input')
+
+
 if (typeof questionData !== 'undefined'){
     fillQuestion(questionData)
+    dateField.value = '1990-01-01'
+} else {
+    let today = new Date()
+    dateField.value = today.toISOString().split('T')[0]
 }
+

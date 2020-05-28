@@ -29,7 +29,7 @@ def check_question_db():
     pass
     # TODO - CHeck if a question is already added to dynamodb
 
-def get_question(category, difficulty="medium"):
+def get_question(category, difficulty):
     # Get a single question from the trivia API
     # Returns a dictionary with category, type, difficulty, question, correct_answer, incorrect_answer
     url = "https://opentdb.com/api.php"

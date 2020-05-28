@@ -38,8 +38,11 @@ def index():
         request_type = request.values.get('action')
         if request_type == 'get_question':
             category = request.values.get("category")
-            difficulty = request.values.get("category")
-            data = get_question(category)
+            difficulty = request.values.get("difficulty")
+            data = get_question(category, difficulty)
             return render_template('index.html', data=data)
+        if request_type == 'post_question':
+            print(request.values.to_dict())
+            return render_template('index.html')
     else:
         return render_template('index.html')
