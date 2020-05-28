@@ -5,7 +5,7 @@ from app.forms import LoginForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user
 from app.models import User
-from app.mod import get_question
+from app.mod import get_question, add_question
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -43,6 +43,9 @@ def index():
             return render_template('index.html', data=data)
         if request_type == 'post_question':
             print(request.values.to_dict())
+            question_dict = request.values.to_dict()
+            add_question(question_dict)
+            #post the question to dynamodb and give a response
             return render_template('index.html')
     else:
         return render_template('index.html')

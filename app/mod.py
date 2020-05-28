@@ -1,5 +1,7 @@
 import requests
 import json
+import boto3
+from random import randint
 
 cat_map = {
     'general_knowledge': '9',
@@ -44,3 +46,39 @@ def get_question(category, difficulty):
     return_question['category'] = category
     return return_question
 
+def add_question(question):
+    boto3.setup_default_session(region_name='ap-southeast-2')
+    client = boto3.client('dynamodb')
+    client.put_item(
+        TableName='dev-trivia-q',
+        Item={
+            'id': {
+                'S': str(randint(100000000000,999999999999))
+            },
+            'question': {
+                'S': question['question']
+            },
+            'correct_answer': {
+                'S': question['correct_answer']
+            },
+            'incorrect_answer_1': {
+                'S': question['incorrect_answer_1']
+            },
+            'incorrect_answer_2': {
+                'S': question['incorrect_answer_2']
+            },
+            'incorrect_answer_3': {
+                'S': question['incorrect_answer_3']
+            },
+            'difficulty': {
+                'S': question['difficulty']
+            },
+            'category': {
+                'S': question['category']
+            },
+            'date': {
+                'S': question['date']
+            },
+        }
+    )
+    return 'pass'
