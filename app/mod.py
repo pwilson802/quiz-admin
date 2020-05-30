@@ -2,6 +2,7 @@ import requests
 import json
 import boto3
 from random import randint
+from boto3.dynamodb.conditions import Key, Attr
 
 cat_map = {
     'general_knowledge': '9',
@@ -27,12 +28,31 @@ cat_map = {
     'entertainment_comics': '29',
 }
 
-def check_question_db():
-    pass
-    # TODO - CHeck if a question is already added to dynamodb
+def check_question_db(question, check="all"):
+    # Check if a question is already in the database
+    # check = 'all': will check the entire quesiton string
+    # check = 'part': will just check half the question string
+    boto3.setup_default_session(region_name='ap-southeast-2')
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('dev-trivia-q')
+    if check == 'all':
+        response = table.query(
+            IndexName = 'question-index',
+            KeyConditionExpression=Key('question').eq(question)
+            )
+        count = response['Count']
+    else:
+        half_question = ' '.join(question.split()[:len(question.split()) // 2])
+        response = table.scan(
+            FilterExpression=Attr('question').contains(half_question)
+            )
+        count = response['Count']
+    return count
 
-def get_question(category, difficulty):
+
+def get_question_api(category, difficulty):
     # Get a single question from the trivia API
+    # Check the first half or the question to see if its alrady in the datbase before returning it.
     # Returns a dictionary with category, type, difficulty, question, correct_answer, incorrect_answer
     url = "https://opentdb.com/api.php"
     params = {
@@ -41,8 +61,17 @@ def get_question(category, difficulty):
         'type': 'multiple',
         'difficulty': difficulty
     }
-    all_questions = json.loads(requests.get(url, params=params).text)['results']
-    return_question = all_questions[0]
+    found_question = False
+    while found_question == False:
+        all_questions = json.loads(requests.get(url, params=params).text)['results']
+        for q in all_questions:
+            q_check = check_question_db(q['question'], check="part")
+            if q_check == False:
+                return_question = q
+                found_question = True
+            else:
+                print(f'question already added - {q}')
+    # The returned category text contains a space, so this is overwritter with values used in the database
     return_question['category'] = category
     return return_question
 
