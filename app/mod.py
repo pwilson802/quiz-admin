@@ -9,7 +9,7 @@ cat_map = {
     'entertainment_books': '10',
     'entertainment_film': '11',
     'entertainment_music': '12',
-    'entertainment_misicals': '13',
+    'entertainment_musicals': '13',
     'entertainment_telivision': '14',
     'entertainment_video_games': '15',
     'entertainment_board_games': '16',
@@ -42,7 +42,7 @@ def check_question_db(question, check="all"):
             )
         count = response['Count']
     else:
-        half_question = ' '.join(question.split()[:len(question.split()) // 2])
+        half_question = ' '.join(question.split()[len(question.split()) // 2:])
         response = table.scan(
             FilterExpression=Attr('question').contains(half_question)
             )

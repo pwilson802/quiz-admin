@@ -1,8 +1,16 @@
-const showButton = document.querySelector('.show-api')
+const showAPIButton = document.querySelector('.show-api')
 const apiSection = document.querySelector('.get-api')
+const showCSVButton = document.querySelector('.show-csv')
+const csvSection = document.querySelector('.get-csv')
 
-showButton.addEventListener('click', function(){
+showAPIButton.addEventListener('click', function(){
     apiSection.classList.remove("hide")
+    showCSVButton.classList.add("hide")
+})
+
+showCSVButton.addEventListener('click', function(){
+    csvSection.classList.remove("hide")
+    showAPIButton.classList.add("hide")
 })
 
 const categories = [
@@ -10,7 +18,7 @@ const categories = [
         'entertainment_books',
         'entertainment_film',
         'entertainment_music',
-        'entertainment_misicals',
+        'entertainment_musicals',
         'entertainment_telivision',
         'entertainment_video_games',
         'entertainment_board_games',
@@ -48,8 +56,8 @@ const correctAnswer = document.querySelector('.correct_answer')
 const incorrectAnswer1 = document.querySelector('.incorrect_answer_1')
 const incorrectAnswer2 = document.querySelector('.incorrect_answer_2')
 const incorrectAnswer3 = document.querySelector('.incorrect_answer_3')
-const difficultyField = document.querySelector('.difficulty')
-const categoryField = document.querySelector('.category')
+const difficultyField = document.querySelector('.submit-difficulty')
+const categoryField = document.querySelector('.submit-category')
 
 const fillQuestion = function(data){
     questionField.value = data.question
