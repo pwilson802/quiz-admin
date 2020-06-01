@@ -34,7 +34,9 @@ const categories = [
         'celebrities',
         'animals',
         'vehicles',
-        'entertainment_comics']
+        'entertainment_comics',
+        'food',
+        'language']
 
 const categorySelect = document.querySelectorAll('.category')
 
