@@ -75,8 +75,8 @@ const dateField = document.querySelector('.date-input')
 
 
 if (typeof questionData !== 'undefined'){
-    fillQuestion(questionData)
     dateField.value = '1990-01-01'
+    fillQuestion(questionData)
 } else {
     let today = new Date()
     dateField.value = today.toISOString().split('T')[0]

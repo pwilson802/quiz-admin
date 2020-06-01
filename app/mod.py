@@ -1,4 +1,5 @@
 import os
+import csv
 import requests
 import json
 import boto3
@@ -6,6 +7,7 @@ from random import randint
 from boto3.dynamodb.conditions import Key, Attr
 
 DYNAMO_DB = os.environ.get("TRIVIA_DYNAMODB")
+TRIVIA_CSV_1 = os.environ.get("TRIVIA_CSV_1")
 
 cat_map = {
     'general_knowledge': '9',
@@ -83,7 +85,7 @@ def add_question(question):
     # First check that the question is not already in the database
     q_check = check_question_db(question['question'], check="all")
     if q_check == True:
-        print('question alreeady exists')
+        print('question already exists')
         return {'response': 'already_exists'}
     boto3.setup_default_session(region_name='ap-southeast-2')
     client = boto3.client('dynamodb')
@@ -119,4 +121,18 @@ def add_question(question):
             },
         }
     )
-    return 'question_added'
+    return {'response': 'question_added'}
+
+def get_question_csv():
+    # gets the top question from the csv file
+    # deleted this file from the csf file so it doesn't get used again
+    with open(TRIVIA_CSV_1) as file:
+        csv_reader = csv.reader(file)
+        lines = list(csv_reader)
+        category, question, answer = lines[1]
+        out_file_data = lines[:1] + lines[2:]
+    with open(TRIVIA_CSV_1, 'w') as file:
+        csv_writer = csv.writer(file)
+        csv_writer.writerows(out_file_data)
+    result = {'category': category, 'question': question, 'correct_answer': answer}
+    return result
