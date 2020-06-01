@@ -1,8 +1,11 @@
+import os
 import requests
 import json
 import boto3
 from random import randint
 from boto3.dynamodb.conditions import Key, Attr
+
+DYNAMO_DB = os.environ.get("TRIVIA_DYNAMODB")
 
 cat_map = {
     'general_knowledge': '9',
@@ -34,7 +37,7 @@ def check_question_db(question, check="all"):
     # check = 'part': will just check half the question string
     boto3.setup_default_session(region_name='ap-southeast-2')
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('dev-trivia-q')
+    table = dynamodb.Table(DYNAMO_DB)
     if check == 'all':
         response = table.query(
             IndexName = 'question-index',
@@ -76,10 +79,16 @@ def get_question_api(category, difficulty):
     return return_question
 
 def add_question(question):
+    # Adds a question to DynamoDB 
+    # First check that the question is not already in the database
+    q_check = check_question_db(question['question'], check="all")
+    if q_check == True:
+        print('question alreeady exists')
+        return {'response': 'already_exists'}
     boto3.setup_default_session(region_name='ap-southeast-2')
     client = boto3.client('dynamodb')
     client.put_item(
-        TableName='dev-trivia-q',
+        TableName=DYNAMO_DB,
         Item={
             'id': {
                 'S': str(randint(100000000000,999999999999))
@@ -110,4 +119,4 @@ def add_question(question):
             },
         }
     )
-    return 'pass'
+    return 'question_added'

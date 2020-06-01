@@ -41,10 +41,16 @@ def index():
             difficulty = request.values.get("difficulty")
             data = get_question_api(category, difficulty)
             return render_template('index.html', data=data)
+        if request_type == 'get_question_csv':
+            data = get_question_csv()
+            return render_template('index.html', data=data)
         if request_type == 'post_question':
             print(request.values.to_dict())
             question_dict = request.values.to_dict()
-            add_question(question_dict)
+            add_q = add_question(question_dict)
+            if add_q['response'] == 'already_exists':
+                # This looks really bad and should be fixed
+                flash('Question is already in the database')
             #post the question to dynamodb and give a response
             return render_template('index.html')
     else:
