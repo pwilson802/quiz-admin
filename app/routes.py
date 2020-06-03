@@ -40,9 +40,11 @@ def index():
             category = request.values.get("category")
             difficulty = request.values.get("difficulty")
             data = get_question_api(category, difficulty)
+            data['source'] = 'api'
             return render_template('index.html', data=data)
         if request_type == 'get_question_csv':
             data = get_question_csv()
+            data['source'] = 'csv'
             return render_template('index.html', data=data)
         if request_type == 'post_question':
             print(request.values.to_dict())

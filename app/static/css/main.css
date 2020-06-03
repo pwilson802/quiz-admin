@@ -3,13 +3,14 @@
 }
 
 h1 {
-    font-family: Arial, Helvetica, sans-serif;
-    color: #F27405;
+    font-family: 'Oswald', sans-serif;
+    color: #D92B04;
     text-align: center;
+    font-size: 2rem;
 }
 
 body {
-    background-color: #E3E7EA;
+    background-color: #faf5ea
 }
 
 .wrapper {
@@ -18,7 +19,7 @@ body {
 }
 
 .admin-box {
-    padding: 3rem;
+    padding: 0 3rem;
     border-radius: 10%;
 }
 nav {
@@ -26,6 +27,10 @@ nav {
     justify-content: space-between;
     font-size: 1.5rem;
     font-family: arial;
+    background-image: linear-gradient(to right top, #da6c0b, #e38030, #eb944d, #f2a869, #f9bb86);
+    line-height: 2.5rem;
+    padding: 0 2rem;
+    font-family: 'Oswald', sans-serif;
 }
 
 nav a {
@@ -34,37 +39,59 @@ nav a {
 }
 
 nav a:hover {
-    color: #F27405;
+    color: #1C6C8C
 }
 
 .control-section {
-    display: flex; 
-    flex-flow: row nowrap;
-    font-size: 1.3rem;
     justify-content: flex-start;
 }
 
-.control-section button {
-    font-size: 1.3rem;
+.control-section button, .input-box {
+    font-size: 1.1rem;
     margin-right: 1rem;
+    border: 2px solid #fdad9b;
+    background-color: white;
+    border-radius: 22px;
+    padding: 2px 20px;
+    color: grey;
+    font-family: 'Oswald', sans-serif;
 }
+
+.control-section button:hover, .input-box:hover {
+    background-color: #f5933d;
+    border: 2px solid #fb6f50 ;
+}
+
+.control-section button:active, .input-box:hover {
+    background-color: #da6c0b;
+    border: 2px solid #fa3205;
+    color: black;
+}
+
+.category:hover, .difficulty:hover, .date-input:hover, submit-difficulty:hover {
+    background-color: white;
+}
+
+.category:active, .difficulty:active, .date-input:active, submit-difficulty:active {
+    background-color: white;
+}
+
 
 .control-section select {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-right: 1rem;
 }
 
-.control-section input {
-    font-size: 1.3rem;
-    margin-right: 1rem;
-    border-radius: 5%;
-    padding: 0 20px;
-    border: none;
+
+.source-buttons {
+    font-size: 1.1rem;
+    margin-bottom: 0.8rem;
 }
 
 .question-input {
     display: flex;
     flex-flow: column nowrap;
+    font-family: 'Oswald', sans-serif;
 }
 
 .question-input input {
@@ -72,21 +99,41 @@ nav a:hover {
     margin-top: 1rem;
     font-family: arial;
     padding-left: 1rem;
-    border-radius: 5%;
-    font-size: 1.3rem;
-    border: none;
+    border-radius: 22px;
+    font-size: 1.1rem;
+    border: 1px solid #F2B90F;
+    font-family: 'Oswald', sans-serif;
 }
 
 .question-input input::placeholder {
-    color: #F29C04;
+    color: #f6ce55;
 }
 
-button {
-    border: none;
-    border-radius: 10%;
-    padding: 0 20px;
+#question {
+    line-height: 3;
 }
+
 
 .hide {
     display: none;
+}
+
+.selected-options {
+    margin-top: 0.7rem;
+    display: flex;
+    justify-content: flex-start;
+    font-family: 'Oswald', sans-serif;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    font-family: 'Oswald', sans-serif;
+
+}
+
+.submit-button input{
+    font-size: 1.6rem;
+    font-family: 'Oswald', sans-serif;
 }

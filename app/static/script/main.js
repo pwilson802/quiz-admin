@@ -5,12 +5,12 @@ const csvSection = document.querySelector('.get-csv')
 
 showAPIButton.addEventListener('click', function(){
     apiSection.classList.remove("hide")
-    showCSVButton.classList.add("hide")
+    csvSection.classList.add("hide")
 })
 
 showCSVButton.addEventListener('click', function(){
     csvSection.classList.remove("hide")
-    showAPIButton.classList.add("hide")
+    apiSection.classList.add("hide")
 })
 
 const categories = [

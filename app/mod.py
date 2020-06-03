@@ -41,12 +41,15 @@ def check_question_db(question, check="all"):
     dynamodb = boto3.resource('dynamodb')
     table = dynamodb.Table(DYNAMO_DB)
     if check == 'all':
+    # Final check checks existing question for the same question
         response = table.query(
             IndexName = 'question-index',
             KeyConditionExpression=Key('question').eq(question)
             )
         count = response['Count']
     else:
+    # First check tries to find a question similar or in the unwanted database
+    # TODO - Add check of unwanted db
         half_question = ' '.join(question.split()[len(question.split()) // 2:])
         response = table.scan(
             FilterExpression=Attr('question').contains(half_question)

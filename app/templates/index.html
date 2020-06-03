@@ -3,56 +3,54 @@
 <div class="admin-box">
     <h1>Add Trivia Questions</h1>
     <div class="control-section">
-        <button class="show-api">From API</button>
-        <button class="show-csv">From CSV</button>
-        <form class="hide get-api" action="{{ url_for('index') }}" method="post">
-            <input type="hidden" id="action" name="action" value="get_question_api">
-            <select class="category" name="category">
-            </select>
-            <select class="difficulty" name="difficulty">
-                <option value="easy">easy</option>
-                <option value="medium">medium</option>
-                <option value="hard">hard</option>
-            </select>
-            <input type="hidden" id="option" name="option" value="get_api">
-            <input type="submit" value="Get Question">
-        </form>
-        <form class="hide get-csv" action="{{ url_for('index') }}" method="post">
-            <input type="hidden" id="action" name="action" value="get_question_csv">
-            <select class="category" name="category">
-            </select>
-            <input type="hidden" id="option" name="option" value="get_csv">
-            <input type="submit" value="New Question">
-        </form>
+        <div class="source-buttons">
+            <button class="show-api">From API</button>
+            <button class="show-csv">From CSV</button>
+        </div>
+        <div class="source-options">
+            <form class="hide get-api" action="{{ url_for('index') }}" method="post">
+                <input type="hidden" id="action" name="action" value="get_question_api">
+                <select class="category input-box" name="category">
+                </select>
+                <select class="difficulty input-box" name="difficulty">
+                    <option value="easy">easy</option>
+                    <option value="medium">medium</option>
+                    <option value="hard">hard</option>
+                </select>
+                <input type="hidden" id="option" name="option" value="get_api">
+                <input type="submit" class="input-box" value="Get Question">
+            </form>
+            <form class="hide get-csv" action="{{ url_for('index') }}" method="post">
+                <input type="hidden" id="action" name="action" value="get_question_csv">
+                <input type="hidden" id="option" name="option" value="get_csv">
+                <input class="input-box" type="submit" value="New Question">
+            </form>
+        </div>
     </div>
     <form action="{{ url_for('index') }}" method="post">
         <input type="hidden" id="action" name="action" value="post_question">
         <div class="question-input">
-            <input class="question" type="text" name="question" placeholder="Trivia Question">
+            <input id="question" class="question" type="text" name="question" placeholder="Trivia Question">
             <input class="correct_answer" type="text" name="correct_answer" placeholder="Correct Answer">
             <input class="incorrect_answer_1" type="text" name="incorrect_answer_1" placeholder="Incorrect Answer">
             <input class="incorrect_answer_2" type="text" name="incorrect_answer_2" placeholder="Incorrect Answer">
             <input class="incorrect_answer_3" type="text" name="incorrect_answer_3" placeholder="Incorrect Answer">
         </div>
-        <div class="select-difficulty">
-            <select class="difficulty submit-difficulty" name="difficulty">
+        <div class="selected-options">
+            <select class="difficulty submit-difficulty input-box" name="difficulty">
                 <option value="easy">easy</option>
                 <option value="medium">medium</option>
                 <option value="hard">hard</option>
             </select>
-        </div>
-        <div class="select-category">
-            <select class="category submit-category" name="category">
+            <select class="category submit-category input-box" name="category">
                 <option value="general_knowledge">general_knowledge</option>
                 <option value="geography">geography</option>
                 <option value="history">history</option>
             </select>
-        </div>
-        <div class="datetime">
-            <input class="date-input" type="date", name="date" />
+            <input class="date-input input-box" type="date", name="date" />
         </div>
         <div class="submit-button">
-            <input type="submit" value="Add Question">
+            <input class="input-box" type="submit" value="Add Question">
         </div>
     </form>
 </div>
