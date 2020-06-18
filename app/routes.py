@@ -5,7 +5,7 @@ from app.forms import LoginForm
 from flask_login import login_required
 from flask_login import current_user, login_user, logout_user
 from app.models import User
-from app.mod import get_question_api, add_question, get_question_csv
+from app.mod import get_question_api, add_question, get_question_csv, get_all_qq_questions
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -35,6 +35,13 @@ def logout():
 @login_required
 def index():
     return render_template('index.html')
+
+
+@app.route('/qq_index', methods=["GET"])
+@login_required
+def qq_index():
+    data = get_all_qq_questions()
+    return render_template('qq_index.html', data=data)
 
 
 @app.route('/qq_add', methods=["POST", "GET"])

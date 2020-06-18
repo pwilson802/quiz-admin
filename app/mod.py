@@ -139,3 +139,12 @@ def get_question_csv():
         csv_writer.writerows(out_file_data)
     result = {'category': category, 'question': question, 'correct_answer': answer}
     return result
+
+def get_all_qq_questions():
+    # Gets all the quite quizzical questions into json
+    boto3.setup_default_session(region_name='ap-southeast-2')
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table(DYNAMO_DB)
+    all_data = table.scan()
+    return all_data['Items']
+    
